@@ -1,0 +1,23 @@
+{
+  "name": "EnOS-OpenSource",
+  "version": "0.0.0",
+  "description": "Closed Alpha",
+  "main": "app.js",
+  "scripts": {
+    "preview": "open http://playground.open-rpc.org?schemaUrl=https://localhost:3030",
+    "mockserver": "open-rpc-mock-server -s openrpc.json",
+    "generatorclient": "open-rpc-generator-client -s openrpc.json MyClient",
+    "publish": "npm run generatorclient && npm publish --access=publish"
+  },
+  "main": "MyClient/build/index.js",
+  "files": [
+    "MyClient/"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@open-rpc/generator-client": "^1.2.0",
+    "@open-rpc/mock-server": "0.0.0-development"
+  }
+}

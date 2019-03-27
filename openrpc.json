@@ -1,0 +1,286 @@
+{
+  "openrpc": "1.0.0-rc0",
+  "info": {
+    "version": "0.0.1",
+    "title": "EnOS OpenRPC API",
+    "description": "EnOS backend based on OpenRPC",
+    "termsOfService": "https://ethernode.io/terms/",
+    "contact": {
+      "name": "ethernode support",
+      "email": "support@ethernode.io",
+      "url": "https://ethernode.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "name": "RPC Listener",
+      "url": "localhost:3030/"
+    }
+  ],
+  "methods": [
+    {
+      "name": "createAccount",
+      "description": "Creates a new user in the system.  Duplicates are not allowed, first user is admin",
+      "params": [
+        {
+          "name": "userName",
+          "description": "unique username",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "password",
+          "description": "user password",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "createAccountRes",
+        "description": "Status of user creation",
+        "schema": {
+          "type": "object",
+          "required": [
+            "response"
+          ],
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success returns info on new user if error returns error message"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "login",
+      "description": "checks for user account and sets login variables and fetches session token.",
+      "params": [
+        {
+          "name": "userName",
+          "description": "User Name to fetch",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "password",
+          "description": "user password to decode oneway hash password",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "loginRes",
+        "description": "Status of user login true if user exists and password match, you will also receive an auth token, that has to be send with every other api call afterwards "
+      }
+    },
+    {
+      "name": "getUser",
+      "description": "Gets single user account based on userName provided",
+      "params": [
+        {
+          "name": "Auth_Token",
+          "description": "Authorization token you receive at login, needs to be assed in header as Key: Authorization, Value: BEARER {{token}}",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "userName",
+          "description": "userName to get info on",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "getUserRes",
+        "description": "If user exists return user info to include nodes user is running",
+        "schema": {
+          "type": "object",
+          "required": [
+            "response"
+          ],
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success returns info on new user if error returns error message"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "addNode",
+      "description": "Spin up a docker container with node settings specified in the dashboard",
+      "params": [
+        {
+          "name": "Auth_Token",
+          "description": "Authorization token you receive at login, needs to be assed in header as Key: Authorization, Value: BEARER {{token}}",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "userName",
+          "description": "userName to create the node for",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "nodeName",
+          "description": "name your node fo easy identification",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "nodeNetwork",
+          "description": "Which network is this node for current choice, --classic and --kotti are only supported at this stage",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "addNodeRes",
+        "description": "If user exists return user info and nodes user is running",
+        "schema": {
+          "type": "object",
+          "required": [
+            "response"
+          ],
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success returns info on new user if error returns error message"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "removeNode",
+      "description": "Remove the docker container that is running the selected node to remove",
+      "params": [
+        {
+          "name": "userName",
+          "description": "userName to delete the node for",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "containerId",
+          "description": "docker container ID to remove, returned with getUser method",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "nodeName",
+          "description": "User assigned name for node",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "nodeNetwork",
+          "description": "Blockchain network node is setup for",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "removeNodeRes",
+        "description": "Returns status of node deletion",
+        "schema": {
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success returns info on new user if error returns error message"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "inspectContainer",
+      "description": "Inspect the docker container which is running the node",
+      "params": [
+        {
+          "name": "userName",
+          "description": "userName to check if node belongs to user",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "containerId",
+          "description": "docker container ID to inspect, returned with getUser method",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "inspectContainerRes",
+        "description": "Returns infromation about the docker contianer that is running the node client",
+        "schema": {
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success returns info on new user if error returns error message"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

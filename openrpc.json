@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "title": "EnOS OpenRPC API",
     "description": "EnOS backend based on OpenRPC",
-    "termsOfService": "https://ethernode.io/terms/",
+    "termsOfService": "https://ethernode.io/terms/" \n\n (https://dev.ethernode.io/assets/img/brand/Header-Light.png),
     "contact": {
       "name": "ethernode support",
       "email": "support@ethernode.io",

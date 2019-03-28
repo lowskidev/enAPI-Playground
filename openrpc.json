@@ -65,7 +65,7 @@
       },
       "examples": [
         {
-          "name": "createUserExample",
+          "name": "Create User Success Example success",
           "description": "example of create user",
           "params": [
             {
@@ -88,6 +88,27 @@
                 "password": "$2b$10$mzIXwsSi9L6Z1dsqIo/oRO0xpppEudtWa34kXcsmRLTTBfO9BiXi.",
                 "__v": 0
               }
+            }
+          }
+        },
+        {
+          "name": "Create User Errpr Example",
+          "description": "example of create user error",
+          "params": [
+            {
+              "name": "userName",
+              "value": "bakon"
+            },
+            {
+              "name": "password",
+              "value": "test"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "error message"
             }
           }
         }

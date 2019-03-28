@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "title": "EnOS OpenRPC API",
     "description": "EnOS backend based on OpenRPC",
-    "termsOfService": "https://ethernode.io/terms/ \n\n (https://dev.ethernode.io/assets/img/brand/Header-Light.png)",
+    "termsOfService": "https://ethernode.io/terms/",
     "contact": {
       "name": "ethernode support",
       "email": "support@ethernode.io",
@@ -23,7 +23,7 @@
   ],
   "methods": [
     {
-      "name": "createAccount",
+      "name": "createUser",
       "description": "Creates a new user in the system.  Duplicates are not allowed, first user is admin",
       "params": [
         {
@@ -62,7 +62,36 @@
             }
           }
         }
-      }
+      },
+      "examples": [
+        {
+          "name": "createUserExample",
+          "description": "example of create user",
+          "params": [
+            {
+              "name": "userName",
+              "value": "bakon"
+            },
+            {
+              "name": "password",
+              "value": "test"
+            }
+          ],
+          "result": {
+            "name": "sucess",
+            "value": {
+              "status": "succes",
+              "createAccount": {
+                "nodes": [],
+                "_id": "5c9d42f39d69c93860c11bda",
+                "userName": "bakon4",
+                "password": "$2b$10$mzIXwsSi9L6Z1dsqIo/oRO0xpppEudtWa34kXcsmRLTTBfO9BiXi.",
+                "__v": 0
+              }
+            }
+          }
+        }
+      ]
     },
     {
       "name": "login",

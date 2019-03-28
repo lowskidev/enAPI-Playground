@@ -8,5 +8,5 @@ Please follow this link to open EnOS openrpc.json in the playground where you cn
 [go](https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethernodeio/EnOS-OpenSource/master/openrpc.json{:target="_blank"}
 
 Please be patient with us as we updated this repo.
-Thank you,/n
+Thank you, \n
 Ethernode

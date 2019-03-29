@@ -916,5 +916,31 @@
         }
       ]
     }
-  ]
+  ],
+  "components": {
+    "contentDescriptors": {
+      "Integer": {
+        "name": "String",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "examples": {
+      "userName": {
+        "name": "userName",
+        "type": "string",
+        "summary": "user of the name",
+        "description": "Im not sure how else to say it",
+        "value": "bakon"
+      },
+      "nodeNetwork": {
+        "name": "nodeNetwork",
+        "type": "string",
+        "summary": "blockchain netowrk of the node is running",
+        "description": "Im not sure how else to say it",
+        "value": "kotti"
+      }
+    }
+  }
 }

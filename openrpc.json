@@ -24,7 +24,7 @@
   "methods": [
     {
       "name": "createUser",
-      "description": "Creates a new user in the system.  Duplicates are not allowed, first user is admin",
+      "description": "Creates a new user in the system. Duplicates are not allowed, first user is admin",
       "params": [
         {
           "name": "userName",
@@ -44,32 +44,30 @@
         }
       ],
       "result": {
-        "name": "createAccountRes",
-        "description": "Status of user creation",
+        "name": "createAccountResult",
+        "description": "Retures success or error object",
         "schema": {
           "type": "object",
-          "required": [
-            "response"
-          ],
           "properties": {
             "status": {
               "type": "string",
-              "description": "Response weather creation was a success or error"
+              "description": "Response weather user creation was a success or error"
             },
             "message": {
               "type": "string",
-              "description": "If success returns info on new user if error returns error message"
+              "description": "If success, returns info on new user. If error returns error message"
             }
           }
         }
       },
       "examples": [
         {
-          "name": "Create User Success Example success",
+          "name": "Create User Success Example",
           "description": "example of create user",
           "params": [
             {
               "name": "userName",
+              "type": "string",
               "value": "bakon"
             },
             {
@@ -85,14 +83,13 @@
                 "nodes": [],
                 "_id": "5c9d42f39d69c93860c11bda",
                 "userName": "bakon4",
-                "password": "$2b$10$mzIXwsSi9L6Z1dsqIo/oRO0xpppEudtWa34kXcsmRLTTBfO9BiXi.",
-                "__v": 0
+                "password": "$2b$10$mzIXwsSi9L6Z1dsqIo/oRO0xpppEudtWa34kXcsmRLTTBfO9BiXi."
               }
             }
           }
         },
         {
-          "name": "Create User Errpr Example",
+          "name": "Create User Errr Example",
           "description": "example of create user error",
           "params": [
             {
@@ -137,8 +134,94 @@
       ],
       "result": {
         "name": "loginRes",
-        "description": "Status of user login true if user exists and password match, you will also receive an auth token, that has to be send with every other api call afterwards "
-      }
+        "description": "Status of user login true if user exists and password match, you will also receive an auth token, that has to be send with every other api call afterwards ",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success, returns info on new user and nodes. If error returns error message"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "login User Success Example",
+          "description": "example of susccefull login",
+          "params": [
+            {
+              "name": "userName",
+              "type": "string",
+              "value": "bakon"
+            },
+            {
+              "name": "password",
+              "value": "test"
+            }
+          ],
+          "result": {
+            "name": "sucess",
+            "value": {
+              "result": {
+                "status": "success",
+                "message": "Auth Success",
+                "user": [
+                  {
+                    "nodes": [
+                      {
+                        "nodeId": "8ef49f01b1c400d660802aba3e671dfc86eb59175c24bb0a26436f67e11819f4",
+                        "nodeName": "etc-full",
+                        "nodeNetwork": "classic"
+                      },
+                      {
+                        "nodeId": "8108dc96ac13e4c4c56ec6e43e2371a316176322cdfa1572276612fc577619b0",
+                        "nodeName": "kotti-full",
+                        "nodeNetwork": "kotti"
+                      },
+                      {
+                        "nodeId": "6e084ae85ad5f1aec93d7c7c70db44b0489b7a35e07e6f08e065f7407014edc3",
+                        "nodeName": "etc-fast",
+                        "nodeNetwork": "classic"
+                      }
+                    ],
+                    "_id": "5c8ed3b654ab7b0efcde242f",
+                    "userName": "bakon",
+                    "password": "$2b$10$Gj1W.4L2M6FeClmDmbhlaeSLXtdVLk3MxmrInrDvwE83gBEt7QZMa",
+                    "__v": 0
+                  }
+                ],
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWM4ZWQzYjY1NGFiN2IwZWZjZGUyNDJmIiwiaWF0IjoxNTUzODIzMTk1fQ.7f06McVnooMk6TV-TaZwRGTFuChBcH0WJIJq5QnTGZU"
+              }
+            }
+          }
+        },
+        {
+          "name": "Login User Error Example",
+          "description": "Example of login user error",
+          "params": [
+            {
+              "name": "userName",
+              "value": "bakon"
+            },
+            {
+              "name": "password",
+              "value": "test"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "error message"
+            }
+          }
+        }
+      ]
     },
     {
       "name": "getUser",
@@ -162,7 +245,7 @@
         }
       ],
       "result": {
-        "name": "getUserRes",
+        "name": "getUserResult",
         "description": "If user exists return user info to include nodes user is running",
         "schema": {
           "type": "object",
@@ -176,11 +259,71 @@
             },
             "message": {
               "type": "string",
-              "description": "If success returns info on new user if error returns error message"
+              "description": "If success returns uer info. If error returns error message"
             }
           }
         }
-      }
+      },
+      "examples": [
+        {
+          "name": "Get User Info Success Example",
+          "description": "example of susccefull user info fetch",
+          "params": [
+            {
+              "name": "userName",
+              "type": "string",
+              "value": "bakon"
+            },
+            {
+              "name": "password",
+              "value": "test"
+            }
+          ],
+          "result": {
+            "name": "sucess",
+            "value": {
+              "result": {
+                "status": "success",
+                "account": {
+                  "nodes": [
+                    {
+                      "nodeId": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf",
+                      "nodeName": "kotti-full",
+                      "nodeNetwork": "kotti"
+                    }
+                  ],
+                  "_id": "5c8ed3b654ab7b0efcde242f",
+                  "userName": "bakon",
+                  "password": "$2b$10$Gj1W.4L2M6FeClmDmbhlaeSLXtdVLk3MxmrInrDvwE83gBEt7QZMa",
+                  "__v": 0
+                },
+                "accounts": "yes"
+              }
+            }
+          }
+        },
+        {
+          "name": "Get User Info Error Example",
+          "description": "Example of error",
+          "params": [
+            {
+              "name": "userName",
+              "value": "bakon"
+            },
+            {
+              "name": "password",
+              "value": "test"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": {}
+            }
+          }
+        }
+      ]
     },
     {
       "name": "addNode",
@@ -217,11 +360,19 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "name": "syncType",
+          "description": "Choose between LIGHT, FAST, FULL, FUll - Archive sync",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
         }
       ],
       "result": {
-        "name": "addNodeRes",
-        "description": "If user exists return user info and nodes user is running",
+        "name": "addNodeResult",
+        "description": "Return node creations status",
         "schema": {
           "type": "object",
           "required": [
@@ -234,11 +385,72 @@
             },
             "message": {
               "type": "string",
-              "description": "If success returns info on new user if error returns error message"
+              "description": "If success returns node container info"
             }
           }
         }
-      }
+      },
+      "examples": [
+        {
+          "name": "Add Node Success Example",
+          "description": "example of susccefull node added",
+          "params": [
+            {
+              "name": "userName",
+              "type": "string",
+              "value": "bakon"
+            },
+            {
+              "name": "nodeName",
+              "type": "string",
+              "value": "kotti-full"
+            },
+            {
+              "name": "nodeNetwork",
+              "type": "string",
+              "value": "kotti"
+            },
+            {
+              "name": "syncType",
+              "type": "string",
+              "value": "full"
+            }
+          ],
+          "result": {
+            "name": "success",
+            "value": {
+              "result": {
+                "status": "success",
+                "message": "Node Added",
+                "data": {
+                  "containerID": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Add Node Error Example",
+          "description": "Example of error",
+          "params": [
+            {
+              "name": "userName",
+              "value": "bakon"
+            },
+            {
+              "name": "password",
+              "value": "test"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": {}
+            }
+          }
+        }
+      ]
     },
     {
       "name": "removeNode",

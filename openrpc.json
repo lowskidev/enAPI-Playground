@@ -205,8 +205,7 @@
           "description": "Example of login user error",
           "params": [
             {
-              "name": "userName",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
               "name": "password",
@@ -270,9 +269,7 @@
           "description": "example of susccefull user info fetch",
           "params": [
             {
-              "name": "userName",
-              "type": "string",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
               "name": "password",
@@ -307,8 +304,7 @@
           "description": "Example of error",
           "params": [
             {
-              "name": "userName",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
               "name": "password",
@@ -396,9 +392,7 @@
           "description": "example of susccefull node added",
           "params": [
             {
-              "name": "userName",
-              "type": "string",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
               "name": "nodeName",
@@ -434,8 +428,7 @@
           "description": "Example of error",
           "params": [
             {
-              "name": "userName",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
               "name": "password",
@@ -503,9 +496,7 @@
           "description": "Example of node detroy success",
           "params": [
             {
-              "name": "userName",
-              "type": "string",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
               "name": "containerId",
@@ -527,8 +518,7 @@
           "description": "Example of node destroy error",
           "params": [
             {
-              "name": "userName",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
               "name": "containerId",
@@ -591,9 +581,7 @@
           "description": "example of successful node info fetch",
           "params": [
             {
-              "name": "userName",
-              "type": "string",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
               "name": "containerId",
@@ -642,7 +630,9 @@
             "name": "error",
             "value": {
               "status": "error",
-              "message": {"error": "error message"}
+              "message": {
+                "error": "error message"
+              }
             }
           }
         }
@@ -716,19 +706,13 @@
           "description": "Example of web3_clientVersion",
           "params": [
             {
-              "name": "userName",
-              "type": "string",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
-              "name": "nodeName",
-              "type": "string",
-              "value": "kotti-full"
+              "$ref": "#/components/examples/nodeName"
             },
             {
-              "name": "nodeNetwork",
-              "type": "string",
-              "value": "kotti"
+              "$ref": "#/components/examples/nodeNetwork"
             },
             {
               "name": "params",
@@ -752,19 +736,13 @@
           "description": "node query error example",
           "params": [
             {
-              "name": "userName",
-              "type": "string",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
-              "name": "nodeName",
-              "type": "string",
-              "value": "kotti-full"
+              "$ref": "#/components/examples/nodeName"
             },
             {
-              "name": "nodeNetwork",
-              "type": "string",
-              "value": "kotti"
+              "$ref": "#/components/examples/nodeNetwork"
             },
             {
               "name": "params",
@@ -850,19 +828,13 @@
           "description": "Example Returns the current network id.",
           "params": [
             {
-              "name": "userName",
-              "type": "string",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
-              "name": "nodeName",
-              "type": "string",
-              "value": "kotti-full"
+              "$ref": "#/components/examples/nodeName"
             },
             {
-              "name": "nodeNetwork",
-              "type": "string",
-              "value": "kotti"
+              "$ref": "#/components/examples/nodeNetwork"
             },
             {
               "name": "params",
@@ -886,19 +858,13 @@
           "description": "node query error example",
           "params": [
             {
-              "name": "userName",
-              "type": "string",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
-              "name": "nodeName",
-              "type": "string",
-              "value": "kotti-full"
+              "$ref": "#/components/examples/nodeName"
             },
             {
-              "name": "nodeNetwork",
-              "type": "string",
-              "value": "kotti"
+              "$ref": "#/components/examples/nodeNetwork"
             },
             {
               "name": "params",
@@ -919,8 +885,10 @@
   ],
   "components": {
     "contentDescriptors": {
-      "Integer": {
-        "name": "String",
+      "nodeName": {
+        "name": "userName",
+        "description": "user name",
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -933,6 +901,13 @@
         "summary": "user of the name",
         "description": "Im not sure how else to say it",
         "value": "bakon"
+      },
+      "nodeName": {
+        "name": "nodeName",
+        "type": "string",
+        "summary": "name of node in question",
+        "description": "just the name of the node",
+        "value": "kotti-full"
       },
       "nodeNetwork": {
         "name": "nodeNetwork",

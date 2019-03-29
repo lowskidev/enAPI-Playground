@@ -479,18 +479,10 @@
           "schema": {
             "type": "string"
           }
-        },
-        {
-          "name": "nodeNetwork",
-          "description": "Blockchain network node is setup for",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
         }
       ],
       "result": {
-        "name": "removeNodeRes",
+        "name": "removeNodeResult",
         "description": "Returns status of node deletion",
         "schema": {
           "properties": {
@@ -504,10 +496,60 @@
             }
           }
         }
-      }
+      },
+      "examples": [
+        {
+          "name": "Node Destroy Success Example",
+          "description": "Example of node detroy success",
+          "params": [
+            {
+              "name": "userName",
+              "type": "string",
+              "value": "bakon"
+            },
+            {
+              "name": "containerId",
+              "type": "string",
+              "value": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf"
+            }
+          ],
+          "result": {
+            "name": "success",
+            "value": {
+              "result": {
+                "status": "success"
+              }
+            }
+          }
+        },
+        {
+          "name": "Node Destroy Error Example",
+          "description": "Example of node destroy error",
+          "params": [
+            {
+              "name": "userName",
+              "value": "bakon"
+            },
+            {
+              "name": "containerId",
+              "type": "string",
+              "value": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": {
+                "error": "error message"
+              }
+            }
+          }
+        }
+      ]
     },
     {
-      "name": "inspectContainer",
+      "name": "getNodeContainerInfo",
       "description": "Inspect the docker container which is running the node",
       "params": [
         {
@@ -528,21 +570,351 @@
         }
       ],
       "result": {
-        "name": "inspectContainerRes",
+        "name": "getNodeContainerInfoResult",
         "description": "Returns infromation about the docker contianer that is running the node client",
         "schema": {
           "properties": {
             "status": {
               "type": "string",
-              "description": "Response weather creation was a success or error"
+              "description": "Returns Success or Error"
             },
             "message": {
               "type": "string",
-              "description": "If success returns info on new user if error returns error message"
+              "description": "If success returns info about docker contianer node is running on. If Error returns error"
             }
           }
         }
-      }
+      },
+      "examples": [
+        {
+          "name": "Node container info Success Example",
+          "description": "example of successful node info fetch",
+          "params": [
+            {
+              "name": "userName",
+              "type": "string",
+              "value": "bakon"
+            },
+            {
+              "name": "containerId",
+              "type": "string",
+              "value": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf"
+            }
+          ],
+          "result": {
+            "name": "success",
+            "value": {
+              "result": {
+                "status": "success",
+                "nodeInspect": {
+                  "containerID": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf",
+                  "containerCreated": "2019-03-29T03:16:10.371956508Z",
+                  "containerState": "running",
+                  "NetWorkSettings": {
+                    "containerIP": "172.17.0.3",
+                    "rcpPort": "33076"
+                  }
+                },
+                "nodeData": {
+                  "_id": "5c8ed3b654ab7b0efcde242f",
+                  "nodes": [
+                    {
+                      "nodeId": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf",
+                      "nodeName": "kotti-full",
+                      "nodeNetwork": "kotti"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Node container info Error Example",
+          "description": "Example of error",
+          "params": [
+            {
+              "name": "userName",
+              "value": "bakon"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": {"error": "error message"}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "web3_clientVersion",
+      "description": "Returns the current client version.",
+      "params": [
+        {
+          "name": "userName",
+          "description": "user name",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "nodeName",
+          "description": "unode name used for the query return with getUser method",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "nodeNetwork",
+          "description": "node name used for the query, obtained with getUser method",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "method",
+          "description": "method being called, web3_clientVersion",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "params",
+          "description": "Parameters required for the web3 call, none",
+          "required": true,
+          "schema": {
+            "type": "array"
+          }
+        }
+      ],
+      "result": {
+        "name": "web3_clientVersionResult",
+        "description": "Returns the current client version",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Returns the current client version"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success retures node client version. If error returns error message"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Display Client Version Success",
+          "description": "Example of web3_clientVersion",
+          "params": [
+            {
+              "name": "userName",
+              "type": "string",
+              "value": "bakon"
+            },
+            {
+              "name": "nodeName",
+              "type": "string",
+              "value": "kotti-full"
+            },
+            {
+              "name": "nodeNetwork",
+              "type": "string",
+              "value": "kotti"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "web3_clientVersion",
+            "value": {
+              "result": {
+                "jsonrpc": "2.0",
+                "id": 42,
+                "result": "Geth/bakon-kotti-full/v1.8.23-stable-f1b192d5/linux-arm64/go1.10.4"
+              }
+            }
+          }
+        },
+        {
+          "name": "Node Query Error",
+          "description": "node query error example",
+          "params": [
+            {
+              "name": "userName",
+              "type": "string",
+              "value": "bakon"
+            },
+            {
+              "name": "nodeName",
+              "type": "string",
+              "value": "kotti-full"
+            },
+            {
+              "name": "nodeNetwork",
+              "type": "string",
+              "value": "kotti"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "error message"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "net_version",
+      "description": "Returns the current client version.",
+      "params": [
+        {
+          "name": "userName",
+          "description": "user name",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "nodeName",
+          "description": "unode name used for the query return with getUser method",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "nodeNetwork",
+          "description": "node name used for the query, obtained with getUser method",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "method",
+          "description": "method being called, net_version",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "params",
+          "description": "Parameters required for the web3 call, none",
+          "required": true,
+          "schema": {
+            "type": "array"
+          }
+        }
+      ],
+      "result": {
+        "name": "net_versionResult",
+        "description": "Returns the current network id.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Returns the current network id."
+            },
+            "message": {
+              "type": "string",
+              "description": "If success Returns the current network id.. If error returns error message"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Returns the current network id.",
+          "description": "Example Returns the current network id.",
+          "params": [
+            {
+              "name": "userName",
+              "type": "string",
+              "value": "bakon"
+            },
+            {
+              "name": "nodeName",
+              "type": "string",
+              "value": "kotti-full"
+            },
+            {
+              "name": "nodeNetwork",
+              "type": "string",
+              "value": "kotti"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "net_version",
+            "value": {
+              "result": {
+                "jsonrpc": "2.0",
+                "id": 42,
+                "result": "6"
+              }
+            }
+          }
+        },
+        {
+          "name": "Node Query Error",
+          "description": "node query error example",
+          "params": [
+            {
+              "name": "userName",
+              "type": "string",
+              "value": "bakon"
+            },
+            {
+              "name": "nodeName",
+              "type": "string",
+              "value": "kotti-full"
+            },
+            {
+              "name": "nodeNetwork",
+              "type": "string",
+              "value": "kotti"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "error message"
+            }
+          }
+        }
+      ]
     }
   ]
 }

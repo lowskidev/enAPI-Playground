@@ -89,7 +89,7 @@
           }
         },
         {
-          "name": "Create User Errr Example",
+          "name": "Create User Error Example",
           "description": "example of create user error",
           "params": [
             {

@@ -3,9 +3,7 @@ Open source verison of EnOS
 
 For now we're jsut mergeing pristine into this repo and showing off the power of openRPC.
 
-Please follow this link to open EnOS openrpc.json in the playground where you cna sart previewing the API/SDK.
-
-<a href="https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethernodeio/EnOS-OpenSource/master/openrpc.json" target="_blank">https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethernodeio/EnOS-Playground/master/openrpc.json</a>
+You can preview the API/SDK documentation [here](https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethernodeio/EnOS-OpenSource/master/openrpc.json&uiSchema[appBar][ui:title]=EnOS&uiSchema[appBar][ui:logoUrl]=https://dev.ethernode.io/assets/img/brand/Header-Light.png).
 
 Please be patient with us as we updated this repo.
 Thank you, \n

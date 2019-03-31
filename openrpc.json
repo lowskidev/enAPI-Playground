@@ -3,7 +3,7 @@
   "info": {
     "version": "0.0.1",
     "title": "EnOS OpenRPC API",
-    "description": "EnOS backend based on OpenRPC \n \n ![ethernode-logo](https://dev.ethernode.io/assets/img/brand/Header-Light.png)",
+    "description": "EnOS backend based on OpenRPC",
     "termsOfService": "https://ethernode.io/terms/",
     "contact": {
       "name": "ethernode support",
@@ -450,12 +450,7 @@
       "description": "Remove the docker container that is running the selected node to remove",
       "params": [
         {
-          "name": "userName",
-          "description": "userName to delete the node for",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/userName"
         },
         {
           "name": "containerId",
@@ -543,12 +538,7 @@
       "description": "Inspect the docker container which is running the node",
       "params": [
         {
-          "name": "userName",
-          "description": "userName to check if node belongs to user",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/userName"
         },
         {
           "name": "containerId",
@@ -643,12 +633,7 @@
       "description": "Returns the current client version.",
       "params": [
         {
-          "name": "userName",
-          "description": "user name",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/userName"
         },
         {
           "name": "nodeName",
@@ -765,12 +750,7 @@
       "description": "Returns the current client version.",
       "params": [
         {
-          "name": "userName",
-          "description": "user name",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/userName"
         },
         {
           "name": "nodeName",

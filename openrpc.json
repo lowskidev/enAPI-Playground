@@ -865,7 +865,7 @@
   ],
   "components": {
     "contentDescriptors": {
-      "nodeName": {
+      "userName": {
         "name": "userName",
         "description": "user name",
         "required": true,

@@ -27,20 +27,10 @@
       "description": "Creates a new user in the system. Duplicates are not allowed, first user is admin",
       "params": [
         {
-          "name": "userName",
-          "description": "unique username",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/userName"
         },
         {
-          "name": "password",
-          "description": "user password",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/password"
         }
       ],
       "result": {
@@ -66,13 +56,10 @@
           "description": "example of create user",
           "params": [
             {
-              "name": "userName",
-              "type": "string",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
-              "name": "password",
-              "value": "test"
+              "$ref": "#/components/examples/password"
             }
           ],
           "result": {
@@ -93,12 +80,10 @@
           "description": "example of create user error",
           "params": [
             {
-              "name": "userName",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
-              "name": "password",
-              "value": "test"
+              "$ref": "#/components/examples/password"
             }
           ],
           "result": {
@@ -116,20 +101,10 @@
       "description": "checks for user account and sets login variables and fetches session token.",
       "params": [
         {
-          "name": "userName",
-          "description": "User Name to fetch",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/userName"
         },
         {
-          "name": "password",
-          "description": "user password to decode oneway hash password",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/password"
         }
       ],
       "result": {
@@ -155,13 +130,10 @@
           "description": "example of susccefull login",
           "params": [
             {
-              "name": "userName",
-              "type": "string",
-              "value": "bakon"
+              "$ref": "#/components/examples/userName"
             },
             {
-              "name": "password",
-              "value": "test"
+              "$ref": "#/components/examples/password"
             }
           ],
           "result": {
@@ -174,19 +146,9 @@
                   {
                     "nodes": [
                       {
-                        "nodeId": "8ef49f01b1c400d660802aba3e671dfc86eb59175c24bb0a26436f67e11819f4",
-                        "nodeName": "etc-full",
-                        "nodeNetwork": "classic"
-                      },
-                      {
                         "nodeId": "8108dc96ac13e4c4c56ec6e43e2371a316176322cdfa1572276612fc577619b0",
                         "nodeName": "kotti-full",
                         "nodeNetwork": "kotti"
-                      },
-                      {
-                        "nodeId": "6e084ae85ad5f1aec93d7c7c70db44b0489b7a35e07e6f08e065f7407014edc3",
-                        "nodeName": "etc-fast",
-                        "nodeNetwork": "classic"
                       }
                     ],
                     "_id": "5c8ed3b654ab7b0efcde242f",
@@ -208,8 +170,7 @@
               "$ref": "#/components/examples/userName"
             },
             {
-              "name": "password",
-              "value": "test"
+              "$ref": "#/components/examples/password"
             }
           ],
           "result": {
@@ -227,20 +188,10 @@
       "description": "Gets single user account based on userName provided",
       "params": [
         {
-          "name": "Auth_Token",
-          "description": "Authorization token you receive at login, needs to be assed in header as Key: Authorization, Value: BEARER {{token}}",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/authToken"
         },
         {
-          "name": "userName",
-          "description": "userName to get info on",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/userName"
         }
       ],
       "result": {
@@ -272,8 +223,7 @@
               "$ref": "#/components/examples/userName"
             },
             {
-              "name": "password",
-              "value": "test"
+              "$ref": "#/components/examples/password"
             }
           ],
           "result": {
@@ -326,44 +276,19 @@
       "description": "Spin up a docker container with node settings specified in the dashboard",
       "params": [
         {
-          "name": "Auth_Token",
-          "description": "Authorization token you receive at login, needs to be assed in header as Key: Authorization, Value: BEARER {{token}}",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/authToken"
         },
         {
-          "name": "userName",
-          "description": "userName to create the node for",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/userName"
         },
         {
-          "name": "nodeName",
-          "description": "name your node fo easy identification",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/nodeName"
         },
         {
-          "name": "nodeNetwork",
-          "description": "Which network is this node for current choice, --classic and --kotti are only supported at this stage",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/nodeNetwork"
         },
         {
-          "name": "syncType",
-          "description": "Choose between LIGHT, FAST, FULL, FUll - Archive sync",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/syncType"
         }
       ],
       "result": {
@@ -395,19 +320,13 @@
               "$ref": "#/components/examples/userName"
             },
             {
-              "name": "nodeName",
-              "type": "string",
-              "value": "kotti-full"
+              "$ref": "#/components/examples/nodeName"
             },
             {
-              "name": "nodeNetwork",
-              "type": "string",
-              "value": "kotti"
+              "$ref": "#/components/examples/nodeNetwork"
             },
             {
-              "name": "syncType",
-              "type": "string",
-              "value": "full"
+              "$ref": "#/components/examples/syncType"
             }
           ],
           "result": {
@@ -431,8 +350,7 @@
               "$ref": "#/components/examples/userName"
             },
             {
-              "name": "password",
-              "value": "test"
+              "$ref": "#/components/examples/password"
             }
           ],
           "result": {
@@ -453,20 +371,10 @@
           "$ref": "#/components/contentDescriptors/userName"
         },
         {
-          "name": "containerId",
-          "description": "docker container ID to remove, returned with getUser method",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/containerId"
         },
         {
-          "name": "nodeName",
-          "description": "User assigned name for node",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/nodeName"
         }
       ],
       "result": {
@@ -494,9 +402,7 @@
               "$ref": "#/components/examples/userName"
             },
             {
-              "name": "containerId",
-              "type": "string",
-              "value": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf"
+              "$ref": "#/components/examples/containerId"
             }
           ],
           "result": {
@@ -753,20 +659,10 @@
           "$ref": "#/components/contentDescriptors/userName"
         },
         {
-          "name": "nodeName",
-          "description": "unode name used for the query return with getUser method",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/nodeName"
         },
         {
-          "name": "nodeNetwork",
-          "description": "node name used for the query, obtained with getUser method",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/nodeNetwork"
         },
         {
           "name": "method",
@@ -778,7 +674,7 @@
         },
         {
           "name": "params",
-          "description": "Parameters required for the web3 call, none",
+          "description": "Parameters required for the web3 call, none, pass empty array",
           "required": true,
           "schema": {
             "type": "array"
@@ -872,6 +768,54 @@
         "schema": {
           "type": "string"
         }
+      },
+      "password": {
+        "name": "password",
+        "description": "user password",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "containerId":{
+        "name": "containerId",
+        "description": "docker container ID to remove, returned with getUser method",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "nodeName":{
+        "name": "nodeName",
+        "description": "Name of the node being queried",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "nodeNetwork": {
+        "name": "nodeNetwork",
+        "description": "blockchain network this node is on",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "syncType": {
+        "name": "syncType",
+        "description": "Choose between LIGHT, FAST, FULL, FUll - Archive sync",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "authToken": {
+        "name": "Auth_Token",
+        "description": "Authorization token you receive at login, needs to be assed in header as Key: Authorization, Value: BEARER {{token}}",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
       }
     },
     "examples": {
@@ -879,8 +823,20 @@
         "name": "userName",
         "type": "string",
         "summary": "user of the name",
-        "description": "Im not sure how else to say it",
+        "description": "Username used to login",
         "value": "bakon"
+      },
+      "password": {
+        "name": "password",
+        "type": "string",
+        "summary": "password of the use",
+        "description": "Users Passwordt",
+        "value": "test"
+      },
+      "containerId":{
+        "name": "containerId",
+        "type": "string",
+        "value": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf"
       },
       "nodeName": {
         "name": "nodeName",
@@ -892,9 +848,16 @@
       "nodeNetwork": {
         "name": "nodeNetwork",
         "type": "string",
-        "summary": "blockchain netowrk of the node is running",
-        "description": "Im not sure how else to say it",
+        "summary": "blockchain network the node is running",
+        "description": "The blockchain network of the node",
         "value": "kotti"
+      },
+      "syncType": {
+        "name": "syncType",
+        "type": "string",
+        "summary": "Type of sync the node is performing",
+        "description": "Is this node a Light, Full, or Full - Archive sync",
+        "value": "full"
       }
     }
   }

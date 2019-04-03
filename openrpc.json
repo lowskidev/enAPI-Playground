@@ -31,6 +31,9 @@
         },
         {
           "$ref": "#/components/contentDescriptors/password"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/userRole"
         }
       ],
       "result": {
@@ -69,8 +72,9 @@
               "createAccount": {
                 "nodes": [],
                 "_id": "5c9d42f39d69c93860c11bda",
-                "userName": "bakon4",
-                "password": "$2b$10$mzIXwsSi9L6Z1dsqIo/oRO0xpppEudtWa34kXcsmRLTTBfO9BiXi."
+                "userName": "bakon",
+                "password": "$2b$10$mzIXwsSi9L6Z1dsqIo/oRO0xpppEudtWa34kXcsmRLTTBfO9BiXi.",
+                "userRole": "admin"
               }
             }
           }
@@ -777,6 +781,14 @@
           "type": "string"
         }
       },
+      "userRole": {
+        "name": "userRole",
+        "description": "user role, first user is Admin by default",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "containerId":{
         "name": "containerId",
         "description": "docker container ID to remove, returned with getUser method",
@@ -832,6 +844,13 @@
         "summary": "password of the use",
         "description": "Users Passwordt",
         "value": "test"
+      },
+      "userRole": {
+        "name": "userRole",
+        "type": "string",
+        "summary": "Role of user first account is always Admin",
+        "description": "Role of user first account is always Admin",
+        "value": "admin"
       },
       "containerId":{
         "name": "containerId",

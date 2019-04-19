@@ -1,0 +1,1293 @@
+{
+  "openrpc": "1.0.0-rc1",
+  "info": {
+    "version": "0.5.1",
+    "title": "EnOS OpenRPC API",
+    "description": "EnOS backend based on OpenRPC",
+    "termsOfService": "https://ethernode.io/terms/",
+    "contact": {
+      "name": "ethernode support",
+      "email": "support@ethernode.io",
+      "url": "https://ethernode.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "name": "EnOS Account methods endpoint",
+      "url": "https://localhost:3030/accountRPC/accounts"
+    },
+    {
+      "name": "EnOS Node methods endpoint",
+      "url": "https://localhost:3030/nodesRPC/nodes"
+    },
+    {
+      "name": "EnOS Payment methods endpoint",
+      "url": "https://localhost:3030/authRPC/authnet"
+    }
+  ],
+  "methods": [
+    {
+      "name": "createUser",
+      "description": "Creates a new user in the system. Duplicates are not allowed, first user is admin",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/password"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/userRole"
+        }
+      ],
+      "result": {
+        "name": "createAccountResult",
+        "description": "Retures success or error object",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather user creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success, returns info on new user. If error returns error message"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Create User Success Example",
+          "description": "example of create user",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/password"
+            }
+          ],
+          "result": {
+            "name": "sucess",
+            "value": {
+              "status": "succes",
+              "createAccount": {
+                "nodes": [],
+                "_id": "5c9d42f39d69c93860c11bda",
+                "userName": "bakon",
+                "password": "$2b$10$mzIXwsSi9L6Z1dsqIo/oRO0xpppEudtWa34kXcsmRLTTBfO9BiXi.",
+                "userRole": "admin"
+              }
+            }
+          }
+        },
+        {
+          "name": "Create User Error Example",
+          "description": "example of create user error",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/password"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "error message"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "description": "checks for user account and sets login variables and fetches session token.",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/password"
+        }
+      ],
+      "result": {
+        "name": "loginRes",
+        "description": "Status of user login true if user exists and password match, you will also receive an auth token, that has to be send with every other api call afterwards ",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success, returns info on new user and nodes. If error returns error message"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "login User Success Example",
+          "description": "example of susccefull login",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/password"
+            }
+          ],
+          "result": {
+            "name": "sucess",
+            "value": {
+              "result": {
+                "status": "success",
+                "message": "Auth Success",
+                "user": [
+                  {
+                    "nodes": [
+                      {
+                        "nodeId": "8108dc96ac13e4c4c56ec6e43e2371a316176322cdfa1572276612fc577619b0",
+                        "nodeName": "kotti-full",
+                        "nodeNetwork": "kotti"
+                      }
+                    ],
+                    "_id": "5c8ed3b654ab7b0efcde242f",
+                    "userName": "bakon",
+                    "password": "$2b$10$Gj1W.4L2M6FeClmDmbhlaeSLXtdVLk3MxmrInrDvwE83gBEt7QZMa",
+                    "__v": 0
+                  }
+                ],
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWM4ZWQzYjY1NGFiN2IwZWZjZGUyNDJmIiwiaWF0IjoxNTUzODIzMTk1fQ.7f06McVnooMk6TV-TaZwRGTFuChBcH0WJIJq5QnTGZU"
+              }
+            }
+          }
+        },
+        {
+          "name": "Login User Error Example",
+          "description": "Example of login user error",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/password"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "error message"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "getUser",
+      "description": "Gets single user account based on userName provided",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/authToken"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        }
+      ],
+      "result": {
+        "name": "getUserResult",
+        "description": "If user exists return user info to include nodes user is running",
+        "schema": {
+          "type": "object",
+          "required": [
+            "response"
+          ],
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success returns uer info. If error returns error message"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Get User Info Success Example",
+          "description": "example of susccefull user info fetch",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/password"
+            }
+          ],
+          "result": {
+            "name": "sucess",
+            "value": {
+              "result": {
+                "status": "success",
+                "account": {
+                  "nodes": [
+                    {
+                      "nodeId": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf",
+                      "nodeName": "kotti-full",
+                      "nodeNetwork": "kotti"
+                    }
+                  ],
+                  "_id": "5c8ed3b654ab7b0efcde242f",
+                  "userName": "bakon",
+                  "password": "$2b$10$Gj1W.4L2M6FeClmDmbhlaeSLXtdVLk3MxmrInrDvwE83gBEt7QZMa",
+                  "__v": 0
+                },
+                "accounts": "yes"
+              }
+            }
+          }
+        },
+        {
+          "name": "Get User Info Error Example",
+          "description": "Example of error",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "name": "password",
+              "value": "test"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": {}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "addNode",
+      "description": "Spin up a docker container with node settings specified in the dashboard",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/authToken"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeNetwork"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/syncType"
+        }
+      ],
+      "result": {
+        "name": "addNodeResult",
+        "description": "Return node creations status",
+        "schema": {
+          "type": "object",
+          "required": [
+            "response"
+          ],
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success returns node container info"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Add Node Success Example",
+          "description": "example of susccefull node added",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/nodeName"
+            },
+            {
+              "$ref": "#/components/examples/nodeNetwork"
+            },
+            {
+              "$ref": "#/components/examples/syncType"
+            }
+          ],
+          "result": {
+            "name": "success",
+            "value": {
+              "result": {
+                "status": "success",
+                "message": "Node Added",
+                "data": {
+                  "containerID": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Add Node Error Example",
+          "description": "Example of error",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/password"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": {}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "removeNode",
+      "description": "Remove the docker container that is running the selected node to remove",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/containerId"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeName"
+        }
+      ],
+      "result": {
+        "name": "removeNodeResult",
+        "description": "Returns status of node deletion",
+        "schema": {
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Response weather creation was a success or error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success returns info on new user if error returns error message"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Node Destroy Success Example",
+          "description": "Example of node detroy success",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/containerId"
+            }
+          ],
+          "result": {
+            "name": "success",
+            "value": {
+              "result": {
+                "status": "success"
+              }
+            }
+          }
+        },
+        {
+          "name": "Node Destroy Error Example",
+          "description": "Example of node destroy error",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "name": "containerId",
+              "type": "string",
+              "value": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": {
+                "error": "error message"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "getNodeContainerInfo",
+      "description": "Inspect the docker container which is running the node",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        },
+        {
+          "name": "containerId",
+          "description": "docker container ID to inspect, returned with getUser method",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "getNodeContainerInfoResult",
+        "description": "Returns infromation about the docker contianer that is running the node client",
+        "schema": {
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Returns Success or Error"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success returns info about docker contianer node is running on. If Error returns error"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Node container info Success Example",
+          "description": "example of successful node info fetch",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "name": "containerId",
+              "type": "string",
+              "value": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf"
+            }
+          ],
+          "result": {
+            "name": "success",
+            "value": {
+              "result": {
+                "status": "success",
+                "nodeInspect": {
+                  "containerID": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf",
+                  "containerCreated": "2019-03-29T03:16:10.371956508Z",
+                  "containerState": "running",
+                  "NetWorkSettings": {
+                    "containerIP": "172.17.0.3",
+                    "rcpPort": "33076"
+                  }
+                },
+                "nodeData": {
+                  "_id": "5c8ed3b654ab7b0efcde242f",
+                  "nodes": [
+                    {
+                      "nodeId": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf",
+                      "nodeName": "kotti-full",
+                      "nodeNetwork": "kotti"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Node container info Error Example",
+          "description": "Example of error",
+          "params": [
+            {
+              "name": "userName",
+              "value": "bakon"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": {
+                "error": "error message"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "web3_clientVersion",
+      "description": "Returns the current client version.",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeNetwork"
+        },
+        {
+          "name": "method",
+          "description": "method being called, web3_clientVersion",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "params",
+          "description": "Parameters required for the web3 call, none",
+          "required": true,
+          "schema": {
+            "type": "array"
+          }
+        }
+      ],
+      "result": {
+        "name": "web3_clientVersionResult",
+        "description": "Returns the current client version",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Returns the current client version"
+            },
+            "message": {
+              "type": "string",
+              "description": "If success retures node client version. If error returns error message"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Display Client Version Success",
+          "description": "Example of web3_clientVersion",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/nodeName"
+            },
+            {
+              "$ref": "#/components/examples/nodeNetwork"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "web3_clientVersion",
+            "value": {
+              "result": {
+                "jsonrpc": "2.0",
+                "id": 42,
+                "result": "Geth/bakon-kotti-full/v1.8.23-stable-f1b192d5/linux-arm64/go1.10.4"
+              }
+            }
+          }
+        },
+        {
+          "name": "Node Query Error",
+          "description": "node query error example",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/nodeName"
+            },
+            {
+              "$ref": "#/components/examples/nodeNetwork"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "error message"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "net_version",
+      "description": "Returns the current client version.",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeNetwork"
+        },
+        {
+          "name": "method",
+          "description": "method being called, net_version",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "params",
+          "description": "Parameters required for the web3 call, none, pass empty array",
+          "required": true,
+          "schema": {
+            "type": "array"
+          }
+        }
+      ],
+      "result": {
+        "name": "net_versionResult",
+        "description": "Returns the current network id.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Returns the current network id."
+            },
+            "message": {
+              "type": "string",
+              "description": "If success Returns the current network id.. If error returns error message"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Returns the current network id.",
+          "description": "Example Returns the current network id.",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/nodeName"
+            },
+            {
+              "$ref": "#/components/examples/nodeNetwork"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "net_version",
+            "value": {
+              "result": {
+                "jsonrpc": "2.0",
+                "id": 42,
+                "result": "6"
+              }
+            }
+          }
+        },
+        {
+          "name": "Node Query Error",
+          "description": "node query error example",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/nodeName"
+            },
+            {
+              "$ref": "#/components/examples/nodeNetwork"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "error message"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "processcc",
+      "description": "Process the CC through Authorize.net.",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/difshipping"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/ccnum"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/ccexp"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/cccode"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/orderDesc"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/billFirst"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/billLast"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/company"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/billAddr"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/billCity"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/billState"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/billZip"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/billCntry"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/items"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/salesTax"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipFirst"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipLast"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipComp"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipAddr"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipCity"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipState"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipZip"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipCntry"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipCost"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipType"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/shipDesc"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/txType"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/totalAmount"
+        }
+      ],
+      "result": {
+        "name": "processccResult",
+        "description": "Returns Transaction results",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Returns the current network id."
+            },
+            "message": {
+              "type": "string",
+              "description": "If success Returns the current network id.. If error returns error message"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Returns the current network id.",
+          "description": "Example Returns the current network id.",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/nodeName"
+            },
+            {
+              "$ref": "#/components/examples/nodeNetwork"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "net_version",
+            "value": {
+              "result": {
+                "jsonrpc": "2.0",
+                "id": 42,
+                "result": "6"
+              }
+            }
+          }
+        },
+        {
+          "name": "Node Query Error",
+          "description": "node query error example",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/nodeName"
+            },
+            {
+              "$ref": "#/components/examples/nodeNetwork"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "error message"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "components": {
+    "contentDescriptors": {
+      "userName": {
+        "name": "userName",
+        "description": "user name",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "password": {
+        "name": "password",
+        "description": "user password",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "userRole": {
+        "name": "userRole",
+        "description": "user role, first user is Admin by default",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "containerId":{
+        "name": "containerId",
+        "description": "docker container ID to remove, returned with getUser method",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "nodeName":{
+        "name": "nodeName",
+        "description": "Name of the node being queried",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "nodeNetwork": {
+        "name": "nodeNetwork",
+        "description": "blockchain network this node is on",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "syncType": {
+        "name": "syncType",
+        "description": "Choose between LIGHT, FAST, FULL, FUll - Archive sync",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "authToken": {
+        "name": "Auth_Token",
+        "description": "Authorization token you receive at login, needs to be assed in header as Key: Authorization, Value: BEARER {{token}}",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "difshipping":{
+        "name": "difshipping",
+        "description": "true/false boolean if shipping is different than billing address. If the same pass the billing fileds into the shipping args.",
+        "required": true,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "ccnum": {
+        "name": "ccnum",
+        "description": "Numeric string, 13-16 digits.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "ccexp": {
+        "name": "ccexp",
+        "description": "String, 7 characters. YYYY-MM",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "cccode":{
+        "name": "cccode",
+        "description": "Card Code Verification (CCV) Numeric string, 3-4 digits.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "orderDesc": {
+        "name": "orderDesc",
+        "description": "Order Info String, up to 255 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "billFirst": {
+        "name": "billFirst",
+        "description": "First Name associtated with billing address String, up to 50 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "billLast": {
+        "name": "billLast",
+        "description": " Last Name associtated with billing address String, up to 50 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "company": {
+        "name": "company",
+        "description": "Company associated with customer’s billing address String, up to 50 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "billAddr": {
+        "name": "billAddr",
+        "description": "Billing Address String, up to 60 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "billCity": {
+        "name": "billCity",
+        "description": "Billing City, String, up to 40 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "billState": {
+        "name": "billState",
+        "description": "Billing State, String, up to 40 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "billZip": {
+        "name": "billZip",
+        "description": "Billing Postal Code, String, up to 20 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "billCntry": {
+        "name": "billCntry",
+        "description": "Billing Country String, up to 60 characters. For international payment processors, use the ISO 3166 alpha-3 code for the country.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "items": {
+        "name": "items",
+        "description": "Contains one or more lineItems as objects witht he following Key vals, up to a maximum of 30 line items.",
+        "required": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "itemID": {
+              "type": "string",
+              "description": "Item identification. String, up to 31 characters."
+            },
+            "itemName": {
+              "type": "string",
+              "description": "The human-readable name for the item. String, up to 31 characters."
+            },
+            "itemDesc": {
+              "type": "string",
+              "description": "A description of the item. String, up to 255 characters."
+            },
+            "itemQty": {
+              "type": "string",
+              "description": "The quantity of items sold. String Decimal, up to four decimal places."
+            },
+            "itemCost":{
+              "type": "string",
+              "description": "The cost per unit, excluding tax, freight, and duty. String Decimal, up to four decimal places."
+            }
+          }
+        }
+      },
+      "salesTax": {
+        "name": "salesTax",
+        "description": "Sales tax from the total ammount needs to be passed already calculated, Decimal String, up to four decimal places.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "shipFirst": {
+        "name": "shipFirst",
+        "description": "First Name associtated with shipping address String, up to 50 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "shipLast": {
+        "name": "shipLast",
+        "description": " Last Name associtated with shipping address String, up to 50 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "shipComp": {
+        "name": "shipComp",
+        "description": "Company associated with customer’s shipping address String, up to 50 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "shipAddr": {
+        "name": "shipAddr",
+        "description": "Shipping Address String, up to 60 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "shipCity": {
+        "name": "shipCity",
+        "description": "Shipping City, String, up to 40 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "shipState": {
+        "name": "shipState",
+        "description": "Shipping State, String, up to 40 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "shipZip": {
+        "name": "shipZip",
+        "description": "Shipping Postal Code, String, up to 20 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "shipCntry": {
+        "name": "shipCntry",
+        "description": "Shipping Country String, up to 60 characters. For international payment processors, use the ISO 3166 alpha-3 code for the country.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "shipCost": {
+        "name": "shipCost",
+        "description": "Shipping cost, String Decimal, up to four decimal places.",
+        "required": true,
+        "schema":{
+          "type": "string"
+        }
+      },
+      "shipType": {
+        "name": "shipType",
+        "description": "Name of the shipping charges. String, up to 31 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "shipDesc": {
+        "name": "shipDesc",
+        "description": "Description of the shipping charges. String, up to 255 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "txType": {
+        "name": "txType",
+        "description": "Verifying or charge a cc Options:AUTHCAPTURETRANSACTION to verify and charge, AUTHONLYTRANSACTION to just verify",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "totalAmount": {
+        "name": "totalAmount",
+        "description": "Amount of the transaction. This is the total amount and must include tax, shipping, tips, and any other charges. String Decimal, up to 15 digits with a decimal point. Do not use currency symbols.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "examples": {
+      "userName": {
+        "name": "userName",
+        "type": "string",
+        "summary": "user of the name",
+        "description": "Username used to login",
+        "value": "bakon"
+      },
+      "password": {
+        "name": "password",
+        "type": "string",
+        "summary": "password of the use",
+        "description": "Users Passwordt",
+        "value": "test"
+      },
+      "userRole": {
+        "name": "userRole",
+        "type": "string",
+        "summary": "Role of user first account is always Admin",
+        "description": "Role of user first account is always Admin",
+        "value": "admin"
+      },
+      "containerId":{
+        "name": "containerId",
+        "type": "string",
+        "value": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf"
+      },
+      "nodeName": {
+        "name": "nodeName",
+        "type": "string",
+        "summary": "name of node in question",
+        "description": "just the name of the node",
+        "value": "kotti-full"
+      },
+      "nodeNetwork": {
+        "name": "nodeNetwork",
+        "type": "string",
+        "summary": "blockchain network the node is running",
+        "description": "The blockchain network of the node",
+        "value": "kotti"
+      },
+      "syncType": {
+        "name": "syncType",
+        "type": "string",
+        "summary": "Type of sync the node is performing",
+        "description": "Is this node a Light, Full, or Full - Archive sync",
+        "value": "full"
+      }
+    }
+  }
+}

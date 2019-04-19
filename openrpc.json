@@ -1,5 +1,5 @@
 {
-  "openrpc": "1.0.0",
+  "openrpc": "1.0.0-rc1",
   "info": {
     "version": "0.5.1",
     "title": "EnOS OpenRPC API",
@@ -1085,10 +1085,32 @@
       },
       "items": {
         "name": "items",
-        "description": "Contains one or more lineItem elements, up to a maximum of 30 line items.",
+        "description": "Contains one or more lineItems as objects witht he following Key vals, up to a maximum of 30 line items.",
         "required": true,
         "schema": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "itemID": {
+              "type": "string",
+              "description": "Item identification. String, up to 31 characters."
+            },
+            "itemName": {
+              "type": "string",
+              "description": "The human-readable name for the item. String, up to 31 characters."
+            },
+            "itemDesc": {
+              "type": "string",
+              "description": "A description of the item. String, up to 255 characters."
+            },
+            "itemQty": {
+              "type": "string",
+              "description": "The quantity of items sold. String Decimal, up to four decimal places."
+            },
+            "itemCost":{
+              "type": "string",
+              "description": "The cost per unit, excluding tax, freight, and duty. String Decimal, up to four decimal places."
+            }
+          }
         }
       },
       "salesTax": {
@@ -1182,6 +1204,22 @@
       "shipDesc": {
         "name": "shipDesc",
         "description": "Description of the shipping charges. String, up to 255 characters.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "txType": {
+        "name": "txType",
+        "description": "Verifying or charge a cc Options:AUTHCAPTURETRANSACTION to verify and charge, AUTHONLYTRANSACTION to just verify",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "totalAmount": {
+        "name": "totalAmount",
+        "description": "Amount of the transaction. This is the total amount and must include tax, shipping, tips, and any other charges. String Decimal, up to 15 digits with a decimal point. Do not use currency symbols.",
         "required": true,
         "schema": {
           "type": "string"

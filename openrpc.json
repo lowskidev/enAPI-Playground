@@ -1,7 +1,7 @@
 {
-  "openrpc": "1.0.0-rc0",
+  "openrpc": "1.0.0",
   "info": {
-    "version": "0.0.1",
+    "version": "0.5.1",
     "title": "EnOS OpenRPC API",
     "description": "EnOS backend based on OpenRPC",
     "termsOfService": "https://ethernode.io/terms/",

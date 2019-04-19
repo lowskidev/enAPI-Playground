@@ -1,7 +1,7 @@
 {
   "openrpc": "1.0.0-rc0",
   "info": {
-    "version": "0.0.1",
+    "version": "0.5.0",
     "title": "EnOS OpenRPC API",
     "description": "EnOS backend based on OpenRPC",
     "termsOfService": "https://ethernode.io/terms/",
@@ -837,7 +837,7 @@
       ],
       "result": {
         "name": "processccResult",
-        "description": "Returns the current network id.",
+        "description": "Returns Transaction results",
         "schema": {
           "type": "object",
           "properties": {
@@ -982,15 +982,15 @@
       "difshipping":{
         "name": "difshipping",
         "description": "true/false boolean if shipping is different than billing address. If the same pass the billing fileds into the shipping args.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "boolean"
         }
       },
       "ccnum": {
-        "name": "ccnum:",
+        "name": "ccnum",
         "description": "Numeric string, 13-16 digits.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -998,7 +998,7 @@
       "ccexp": {
         "name": "ccexp",
         "description": "String, 7 characters. YYYY-MM",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1006,7 +1006,7 @@
       "cccode":{
         "name": "cccode",
         "description": "Card Code Verification (CCV) Numeric string, 3-4 digits.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1014,7 +1014,7 @@
       "orderDesc": {
         "name": "orderDesc",
         "description": "Order Info String, up to 255 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1022,7 +1022,7 @@
       "billFirst": {
         "name": "billFirst",
         "description": "First Name associtated with billing address String, up to 50 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1030,7 +1030,7 @@
       "billLast": {
         "name": "billLast",
         "description": " Last Name associtated with billing address String, up to 50 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1038,7 +1038,7 @@
       "company": {
         "name": "company",
         "description": "Company associated with customer’s billing address String, up to 50 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1046,7 +1046,7 @@
       "billAddr": {
         "name": "billAddr",
         "description": "Billing Address String, up to 60 characters.",
-        "require": true,
+        "require"d: true,
         "schema": {
           "type": "string"
         }
@@ -1054,7 +1054,7 @@
       "billCity": {
         "name": "billCity",
         "description": "Billing City, String, up to 40 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1062,7 +1062,7 @@
       "billState": {
         "name": "billState",
         "description": "Billing State, String, up to 40 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1070,7 +1070,7 @@
       "billZip": {
         "name": "billZip",
         "description": "Billing Postal Code, String, up to 20 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1078,7 +1078,7 @@
       "billCntry": {
         "name": "billCntry",
         "description": "Billing Country String, up to 60 characters. For international payment processors, use the ISO 3166 alpha-3 code for the country.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1086,7 +1086,7 @@
       "items": {
         "name": "items",
         "description": "Contains one or more lineItem elements, up to a maximum of 30 line items.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "object"
         }
@@ -1094,7 +1094,7 @@
       "salesTax": {
         "name": "salesTax",
         "description": "Sales tax from the total ammount needs to be passed already calculated, Decimal String, up to four decimal places.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1102,7 +1102,7 @@
       "shipFirst": {
         "name": "shipFirst",
         "description": "First Name associtated with shipping address String, up to 50 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1110,7 +1110,7 @@
       "shipLast": {
         "name": "shipLast",
         "description": " Last Name associtated with shipping address String, up to 50 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1118,7 +1118,7 @@
       "shipComp": {
         "name": "shipComp",
         "description": "Company associated with customer’s shipping address String, up to 50 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1126,7 +1126,7 @@
       "shipAddr": {
         "name": "shipAddr",
         "description": "Shipping Address String, up to 60 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1134,7 +1134,7 @@
       "shipCity": {
         "name": "shipCity",
         "description": "Shipping City, String, up to 40 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1142,7 +1142,7 @@
       "shipState": {
         "name": "shipState",
         "description": "Shipping State, String, up to 40 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1150,7 +1150,7 @@
       "shipZip": {
         "name": "shipZip",
         "description": "Shipping Postal Code, String, up to 20 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1158,7 +1158,7 @@
       "shipCntry": {
         "name": "shipCntry",
         "description": "Shipping Country String, up to 60 characters. For international payment processors, use the ISO 3166 alpha-3 code for the country.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1166,7 +1166,7 @@
       "shipCost": {
         "name": "shipCost",
         "description": "Shipping cost, String Decimal, up to four decimal places.",
-        "require": true,
+        "required": true,
         "schema":{
           "type": "string"
         }
@@ -1174,7 +1174,7 @@
       "shipType": {
         "name": "shipType",
         "description": "Name of the shipping charges. String, up to 31 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }
@@ -1182,7 +1182,7 @@
       "shipDesc": {
         "name": "shipDesc",
         "description": "Description of the shipping charges. String, up to 255 characters.",
-        "require": true,
+        "required": true,
         "schema": {
           "type": "string"
         }

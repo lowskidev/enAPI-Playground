@@ -833,6 +833,12 @@
         },
         {
           "$ref": "#/components/contentDescriptors/shipDesc"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/txType"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/totalAmount"
         }
       ],
       "result": {

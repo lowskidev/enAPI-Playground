@@ -1,7 +1,7 @@
 {
   "openrpc": "1.0.0-rc0",
   "info": {
-    "version": "0.5.0",
+    "version": "0.0.1",
     "title": "EnOS OpenRPC API",
     "description": "EnOS backend based on OpenRPC",
     "termsOfService": "https://ethernode.io/terms/",
@@ -1046,7 +1046,7 @@
       "billAddr": {
         "name": "billAddr",
         "description": "Billing Address String, up to 60 characters.",
-        "require"d: true,
+        "required": true,
         "schema": {
           "type": "string"
         }

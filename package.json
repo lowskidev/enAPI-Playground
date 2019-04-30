@@ -9,10 +9,6 @@
     "generatorclient": "open-rpc-generator-client -s openrpc.json MyClient",
     "publish": "npm run generatorclient && npm publish --access=publish"
   },
-  "main": "MyClient/build/index.js",
-  "files": [
-    "MyClient/"
-  ],
   "author": "",
   "license": "MIT",
   "dependencies": {},

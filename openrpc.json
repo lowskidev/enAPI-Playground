@@ -23,10 +23,6 @@
     {
       "name": "EnOS Node methods endpoint",
       "url": "https://localhost:3030/nodesRPC/nodes"
-    },
-    {
-      "name": "EnOS Payment methods endpoint",
-      "url": "https://localhost:3030/authRPC/authnet"
     }
   ],
   "methods": [

@@ -1,7 +1,7 @@
 {
   "openrpc": "1.0.0-rc1",
   "info": {
-    "version": "0.5.1",
+    "version": "1.0.0-rc4",
     "title": "EnOS OpenRPC API",
     "description": "EnOS backend based on OpenRPC",
     "termsOfService": "https://ethernode.io/terms/",
@@ -17,8 +17,12 @@
   },
   "servers": [
     {
-      "name": "EnOS Account methods endpoint",
-      "url": "https://localhost:3030/accountRPC/accounts"
+      "name": "EnOS Account Creation and login methods endpoint",
+      "url": "https://localhost:3030/accountRPC/usrAdmin"
+    },
+    {
+      "name": "EnOS Account managment endpooint",
+      "url": "https://localhost:3030/accountRPC/usrAcc"
     },
     {
       "name": "EnOS Node methods endpoint",
@@ -117,7 +121,7 @@
       ],
       "result": {
         "name": "loginRes",
-        "description": "Status of user login true if user exists and password match, you will also receive an auth token, that has to be send with every other api call afterwards ",
+        "description": "Status of user login true if user exists and password match, you will also receive an auth token, that has to be send with every api call afterwards ",
         "schema": {
           "type": "object",
           "properties": {

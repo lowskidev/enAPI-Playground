@@ -25,8 +25,16 @@
       "url": "https://localhost:3030/accountRPC/usrAcc"
     },
     {
-      "name": "EnOS Node methods endpoint",
+      "name": "EnOS Node managment methods endpoint",
       "url": "https://localhost:3030/nodesRPC/nodes"
+    },
+    {
+      "name": "EnOS Ethereum json-rpc calls endpoint",
+      "url": "https://localhost:3030/ethRPC/ethRPC"
+    },
+    {
+      "name": "EnOS Whisper(SHH) json-rpc calls endpoint",
+      "url": "https://localhost:3030/shhRPC/shhRPC"
     }
   ],
   "methods": [

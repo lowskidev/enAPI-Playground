@@ -82,9 +82,9 @@
             }
           ],
           "result": {
-            "name": "sucess",
+            "name": "success",
             "value": {
-              "status": "succes",
+              "status": "success",
               "createAccount": {
                 "nodes": [],
                 "_id": "5c9d42f39d69c93860c11bda",
